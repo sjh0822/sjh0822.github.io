@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://https://sjh0822.github.io</id>
+    <title>Gridea</title>
+    <updated>2021-03-06T07:34:27.103Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://https://sjh0822.github.io"/>
+    <link rel="self" href="https://https://sjh0822.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://https://sjh0822.github.io/images/avatar.png</logo>
+    <icon>https://https://sjh0822.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[初识Springboot（一）]]></title>
+        <id>https://https://sjh0822.github.io/post/chu-shi-springbootyi/</id>
+        <link href="https://https://sjh0822.github.io/post/chu-shi-springbootyi/">
+        </link>
+        <updated>2021-03-06T07:20:18.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="初识springboot一">初识Springboot（一）</h1>
+<h2 id="1springboot介绍">1.Springboot介绍</h2>
+<p>Spring Boot是由Pivotal团队提供的全新<a href="https://baike.baidu.com/item/%E6%A1%86%E6%9E%B6/1212667">框架</a>，其设计目的是用来<a href="https://baike.baidu.com/item/%E7%AE%80%E5%8C%96/3374416">简化</a>新<a href="https://baike.baidu.com/item/Spring/85061">Spring</a>应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。通过这种方式，Spring Boot致力于在蓬勃发展的快速应用开发领域(rapid application development)成为领导者</p>
+<h2 id="2springboot的优点">2.springboot的优点</h2>
+<ul>
+<li>自动starter依赖，简化构建配置</li>
+<li>简化ssm流程的开发  内嵌web服务器</li>
+<li>自动配置Spring以及第三方功能Starts</li>
+<li>无代码生成、无需编写XML</li>
+</ul>
+<h2 id="3搭建一个springboot工程">3.搭建一个Springboot工程</h2>
+<h3 id="1环境-java8-maven33">1.环境  java8 + maven3.3+</h3>
+<h3 id="2-创建一个maven应用-其实有快捷方式后面说">2. 创建一个maven应用 (其实有快捷方式后面说)</h3>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306141730.png" alt="image-20210306141723695" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306141845.png" alt="image-20210306141841938" loading="lazy"></figure>
+<p><strong>打开工程的pom文件 导入下面的依赖</strong></p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306142227.png" alt="image-20210306142223311" loading="lazy"></figure>
+<pre><code class="language-xml"> 
+&lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+</code></pre>
+<ul>
+<li>
+<p><strong>创建一个类 使用@SpringBootApplication注解来标注这是一个Springboot程序 在创建main方法 传入当前类的 class 和args 参数</strong></p>
+</li>
+<li>
+<pre><code class="language-xml">/**
+  使用@SpringBootApplication注解来标注这是一个Springboot程序
+ */
+@SpringBootApplication
+public class BootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BootApplication.class,args);
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>在创建 测试的Controller 访问 /hello 请求 使得浏览器 打印出 Hello—SpringBoot</p>
+<pre><code class="language-xml">/**
+    @RestController 是springmvc的新注解 等同于@Controller+@ResponseBody
+ */
+@RestController
+public class TestController {
+
+    @RequestMapping(&quot;/hello&quot;)
+    public String ReturnString(){
+        return &quot;Hello—SpringBoot&quot;;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p><strong>测试  启动 这个 被@SpringBootApplication 标注的类</strong></p>
+<ul>
+<li><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306143656.png" alt="image-20210306143652196" loading="lazy"></li>
+</ul>
+</li>
+<li>
+<p><strong>启动成功控制台打印</strong></p>
+<ul>
+<li><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306143815.png" alt="image-20210306143812377" loading="lazy"></li>
+</ul>
+</li>
+<li>
+<p><strong>测试访问 8080端口  访问/hello</strong></p>
+<ul>
+<li><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306143945.png" alt="image-20210306143940862" loading="lazy"></li>
+</ul>
+</li>
+<li>
+<p><strong>配置 在resoureces 目录下创建 application.properties 配置文件 并且更换 端口号</strong></p>
+<ul>
+<li><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306144317.png" alt="image-20210306144314500" loading="lazy"></li>
+</ul>
+</li>
+<li>
+<p>简化部署打包</p>
+<ul>
+<li>
+<p>在pom 文件下导入依赖</p>
+</li>
+<li>
+<pre><code class="language-xml"> &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>执行maven 命令</p>
+<ul>
+<li><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306150315.png" alt="image-20210306145513846" loading="lazy"></li>
+</ul>
+</li>
+<li>
+<p>停止项目的应用服务 使用命令行方式启动这个应用 进入这个工程的文件夹内 查看 target文件夹 使用 java -jar</p>
+<p>​      命令  项目名字 回车即可 在访问 我们 8888端口下的/hello请求</p>
+<ul>
+<li><img src="https://gitee.com/shengjiahao/filesupload/raw/master//img/20210306150324.png" alt="image-20210306150153975" loading="lazy"></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://https://sjh0822.github.io/post/hello-gridea/</id>
+        <link href="https://https://sjh0822.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>
